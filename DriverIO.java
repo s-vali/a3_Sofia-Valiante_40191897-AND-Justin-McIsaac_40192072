@@ -25,6 +25,7 @@ public class DriverIO {
 		outputStream.print("<body>");
 		
 		int lineNb = 0;
+		final int FIRST_INDEX = 0;
 		outputStream.print("<table>");
 		while(inputStream.hasNextLine()) { 
 			String line = inputStream.nextLine();
@@ -32,33 +33,35 @@ public class DriverIO {
 			lineNb++;
 			
 			if(lineNb == 1) { //first line in the input file
-				outputStream.print("<caption>" + cells[0] + "</caption>");
+				outputStream.print("<caption>" + cells[FIRST_INDEX] + "</caption>");
 			} 
 			else if(lineNb == 2) { //second line in the input file
 				outputStream.print("<tr>");
-				for(int i = 0; i < cells.length; i++) {
-					if(cells[i] == "") {
-						throw new CSVAttributeMissing();
-					} else {
+				try {
+					for(int i = 0; i < 4; i++) {
 						outputStream.print("<th>" + cells[i] + "</th>");
 					}
+					outputStream.print("</tr>");
 				}
-				outputStream.print("</tr>");
+				catch(ArrayIndexOutOfBoundsException e) {
+					throw new CSVAttributeMissing();
+				}
 			}
 			else if(inputStream.hasNextLine() == false) { //when end of file has been reached
 				outputStream.print("</table>"); //end of table
-				outputStream.print("<span>" + cells[0] + "</span>");
+				outputStream.print("<span>" + cells[FIRST_INDEX] + "</span>");
 			}
 			else { //all lines in between the second line and the end of file line
 				outputStream.print("<tr>");
-				for(int i = 0; i < cells.length; i++) {
-					if(cells[i] == "") {
-						throw new CSVDataMissing();
-					} else {
+				try {
+					for(int i = 0; i < 4; i++) {
 						outputStream.print("<td>" + cells[i] + "</td>");
 					}
+					outputStream.print("</tr>");
 				}
-				outputStream.print("</tr>");
+				catch(ArrayIndexOutOfBoundsException e) {
+					throw new CSVDataMissing();
+				}
 			}
 		}
 		
@@ -159,7 +162,7 @@ public class DriverIO {
 			//All files have been opened and created: call convertCSVtoHTML method
 			System.out.println("Attempting to convert CSV to HTML... ");	
 			ConvertCSVtoHTML(inputFileCS, outputFileCS);
-			ConvertCSVtoHTML(inputFileDL,outputFileDL);
+			ConvertCSVtoHTML(inputFileDL,outputFileDL);	
 			
 			//When ConvertCSVToHTML method has completed, close all files to flush the data
 			outputFileCS.close();
@@ -168,6 +171,7 @@ public class DriverIO {
 			inputFileDL.close();
 			
 			//Display one of the files to the console - REQUIREMENT 5
+			
 			
 		}	
 		catch(FileNotFoundException e) {
@@ -216,6 +220,7 @@ public class DriverIO {
 				}
 				System.exit(0); //terminates the program
 			}	
+			
 		}
 	}
 }
