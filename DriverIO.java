@@ -159,7 +159,16 @@ public class DriverIO {
 			//All files have been opened and created: call convertCSVtoHTML method
 			System.out.println("Attempting to convert CSV to HTML... ");	
 			ConvertCSVtoHTML(inputFileCS, outputFileCS);
-			ConvertCSVtoHTML(inputFileDL,outputFileDL);	
+			ConvertCSVtoHTML(inputFileDL,outputFileDL);
+			
+			//When ConvertCSVToHTML method has completed, close all files to flush the data
+			outputFileCS.close();
+			outputFileDL.close();
+			inputFileCS.close();
+			inputFileDL.close();
+			
+			//Display one of the files to the console - REQUIREMENT 5
+			
 		}	
 		catch(FileNotFoundException e) {
 			//Out-print to Exceptions.log
@@ -207,13 +216,6 @@ public class DriverIO {
 				}
 				System.exit(0); //terminates the program
 			}	
-			else {
-				//When ConvertCSVToHTML method has completed, close all files to flush the data
-				outputFileCS.close();
-				outputFileDL.close();
-				inputFileCS.close();
-				inputFileDL.close();
-			}
 		}
 	}
 }
