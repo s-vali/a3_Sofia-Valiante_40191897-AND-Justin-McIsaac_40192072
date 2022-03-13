@@ -152,13 +152,13 @@ public class DriverIO {
 		}
 		finally {
 			if(closeFile) {
-				if(!(inputFileCS == null)) {
+				if(inputFileCS != null) {
 					inputFileCS.close();
 				}
-				if(!(inputFileDL == null)) {
+				if(inputFileDL != null) {
 					inputFileDL.close();
 				}
-				if(!(outputFileCS == null)) {
+				if(outputFileCS != null) {
 					File deleteOutputFileCS = new File("covidStatistics.html");
 					deleteOutputFileCS.delete();
 				}
