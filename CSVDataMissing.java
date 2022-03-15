@@ -53,5 +53,6 @@ public class CSVDataMissing extends Exception {
 			}
 		}
 		writeToExceptionsLog.println("WARNNING: In file " + currentFile.getName() + " line " + lineNb + " is not converted to HTML: missing data: " + dataAttribute + ". ");
+		writeToExceptionsLog.flush();
 	}
 }
