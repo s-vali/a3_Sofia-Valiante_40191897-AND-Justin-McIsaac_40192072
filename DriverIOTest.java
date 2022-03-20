@@ -91,11 +91,13 @@ public class DriverIOTest {
 		/*
 		 * Variables and Objects
 		 */
+		Scanner userInput = null;
 		Scanner inputFileCS = null; //global variable
 		Scanner inputFileDL = null;
 		PrintWriter outputFileCS = null;
 		PrintWriter outputFileDL = null;
 		PrintWriter writeToExceptionsLog = null;
+		BufferedReader readFile = null;
 		
 		File covidStatisticsCSV = null;
 		File doctorListCSV = null;
@@ -103,6 +105,7 @@ public class DriverIOTest {
 		String filename = "";
 		String filetype = "";
 		boolean closeFile = false;
+		int Attempts = 2;
 		
 		/*
 		 * Open the input files and create output files
@@ -228,11 +231,30 @@ public class DriverIOTest {
 				writeToExceptionsLog.close();
 				System.exit(0); //terminates the program
 			}
-			
-			//Display one of the files to the console - REQUIREMENT 5
-			
-			
 		}
+		//Display one of the files to the console - REQUIREMENT 5
+
+		userInput = new Scanner(System.in);
+		while (Attempts > 0) {
+			try {
+				System.out.println("Enter the name of the file you would like to read from: ")
+				filename = userInput.nextLine();
+				readFile = new BufferedReader(new FileReader(filename);
+				String line = readFile.readLine();
+				while (line != null) {
+					System.out.println(line);
+					line = readFile.readLine();
+				}
+			}
+			catch (FileNotFoundException e) {
+				Attempts--;
+				System.out.println(filename + " was not found.");
+				if (Attempts > 0)
+					System.out.println("Try again: ")
+			}
+		}
+		userInput.close();
+		readFile.close();
 	}
 }
 		
