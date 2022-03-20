@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.BufferedReader;
-import java.util.FileReader;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class DriverIOTest {
 	
