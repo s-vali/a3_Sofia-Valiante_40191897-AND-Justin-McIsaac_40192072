@@ -239,9 +239,9 @@ public class DriverIOTest {
 		userInput = new Scanner(System.in);
 		while (Attempts > 0) {
 			try {
-				System.out.println("Enter the name of the file you would like to read from: ")
+				System.out.println("Enter the name of the file you would like to read from: ");
 				filename = userInput.nextLine();
-				readFile = new BufferedReader(new FileReader(filename);
+				readFile = new BufferedReader(new FileReader(filename));
 				String line = readFile.readLine();
 				while (line != null) {
 					System.out.println(line);
@@ -252,11 +252,16 @@ public class DriverIOTest {
 				Attempts--;
 				System.out.println(filename + " was not found.");
 				if (Attempts > 0)
-					System.out.println("Try again: ")
+					System.out.println("Try again: ");
+			}
+			catch (IOException e) {
+				Attempts--;
+				System.out.println(filename + " was not found.");
+				if (Attempts > 0)
+					System.out.println("Try again: ");
 			}
 		}
 		userInput.close();
-		readFile.close();
 	}
 }
 		
