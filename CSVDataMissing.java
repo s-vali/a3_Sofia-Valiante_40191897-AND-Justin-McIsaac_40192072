@@ -1,12 +1,18 @@
 import java.io.File;
 import java.io.PrintWriter;
 
-/*
+/**
  * Exception Class
  */
 
 public class CSVDataMissing extends Exception {	
-
+	/**
+	 * This is the exception class that is thrown when there is a missing data within a CSV file.
+	 * @param currentFile
+	 * @param writeToExceptionsLog
+	 * @param data
+	 * @param lineNb
+	 */
 	public CSVDataMissing(File currentFile, PrintWriter writeToExceptionsLog, String[] data, int lineNb) {
 		
 		//Print out error message to console
