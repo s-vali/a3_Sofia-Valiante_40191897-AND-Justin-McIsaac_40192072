@@ -8,7 +8,12 @@ import java.io.PrintWriter;
  * Exception Class
  */
 public class CSVAttributeMissing extends Exception {
-	
+	/**
+	 * This is the exception class that is thrown when there is a missing attribute within a CSV file.
+	 * @param currentFile
+	 * @param writeToExceptionsLog
+	 * @param data
+	 */
 	public CSVAttributeMissing(File currentFile, PrintWriter writeToExceptionsLog, String[] data) {
 		super("Error: Input row cannot be parsed due to missing information. ");
 		//putting just data from cells[i] doesnt mean anything bc it doesn't exist in the array at the index, 
