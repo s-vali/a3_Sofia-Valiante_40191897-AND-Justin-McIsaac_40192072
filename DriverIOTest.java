@@ -8,12 +8,27 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+//-----------------------------------------------------
+//Assignment 3
+//Question: (include question/part number, if applicable)
+//Written by: Justin_McIsaac_40192072 and Sofia_Valiante_40191897
+//-----------------------------------------------------
+/**
+ * This program's purpose is to transfer information from excel tables to a hospital's website in HTML table format, in the best way possible.
+ */
 public class DriverIOTest {
 	
 // -------------------------------------------------------------------------------------------------------------------------------------------------------
 // static methods	
-	
+	/**
+	 * This static method transfers information from a CSV file to HTML format.
+	 * @param inputStream
+	 * @param outputStream
+	 * @param currentFile
+	 * @param writeToExceptionsLog
+	 * @throws CSVAttributeMissing
+	 * @throws CSVDataMissing
+	 */
 	public static void ConvertCSVtoHTML(Scanner inputStream, PrintWriter outputStream, File currentFile, PrintWriter writeToExceptionsLog) throws CSVAttributeMissing, CSVDataMissing {
 		
 		outputStream.print("<!DOCTYPE html>");
@@ -87,7 +102,10 @@ public class DriverIOTest {
 	
 // -------------------------------------------------------------------------------------------------------------------------------------------------------
 // main()	
-	
+	/**
+	 * Main
+	 * @param args
+	 */
 	public static void main(String[] args) {	
 		
 		/*
