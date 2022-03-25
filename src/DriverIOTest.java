@@ -289,13 +289,13 @@ public class DriverIOTest {
 					Attempts--;
 					System.out.print(filename + " was not found.");
 					if (Attempts > 0)
-						System.out.print(" Try again, ");
+						System.out.print(" Try again! ");
 				}
 				catch (IOException e) {
 					Attempts--;
 					System.out.print(filename + " was not found. ");
 					if (Attempts > 0)
-						System.out.println(" Try again, ");
+						System.out.println(" Try again! ");
 				}
 			}
 			if(userInput != null) {
