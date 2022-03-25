@@ -300,7 +300,15 @@ public class DriverIOTest {
 			}
 			if(userInput != null) {
 				userInput.close();
-			}	
+			}
+			if(readFile != null) {
+				try {
+					readFile.close();
+				}
+				catch(IOException e) {
+					System.out.println("File could not be closed. ");
+				}	
+			}
 		}
 		
 		/*
