@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.PrintWriter;
 //-----------------------------------------------------
 //Assignment 3
-//Question: (include question/part number, if applicable)
 //Written by: Justin_McIsaac_40192072 and Sofia_Valiante_40191897
 //-----------------------------------------------------
 /**
