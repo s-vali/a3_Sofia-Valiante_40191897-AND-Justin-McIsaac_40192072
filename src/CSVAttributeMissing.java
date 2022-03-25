@@ -25,16 +25,16 @@ public class CSVAttributeMissing extends Exception {
 		String dataAttribute = "";
 		if(currentFile.getName().compareTo("covidStatistics-CSV format.csv") == 0) {
 			try {
-				if(data[0].compareToIgnoreCase("Age Group") != 0) {
+				if(data[0].isBlank()) {
 					dataAttribute = "Age Group";
 				}
-				else if(data[1].compareToIgnoreCase("Hospitalized") != 0) {
+				else if(data[1].isBlank()) {
 					dataAttribute = "Hospitalized";
 				}
-				else if(data[2].compareToIgnoreCase("ICU") != 0){
+				else if(data[2].isBlank()){
 					dataAttribute = "ICU";
 				}
-				else if(data[3].compareToIgnoreCase("Fully Vaccinated") != 0){
+				else if(data[3].isBlank()){
 					dataAttribute = "Fully Vaccinated";
 				}
 			}
@@ -44,16 +44,16 @@ public class CSVAttributeMissing extends Exception {
 		}
 		if(currentFile.getName().compareTo("doctorList-CSVformat.csv") == 0) {
 			try {
-				if(data[0].compareToIgnoreCase("Doctor") != 0) {
+				if(data[0].isBlank()) {
 					dataAttribute = "Doctor";
 				} 
-				else if(data[1].compareToIgnoreCase("Specialty") != 0) {
+				else if(data[1].isBlank()) {
 					dataAttribute = "Specialty";
 				} 
-				else if(data[2].compareToIgnoreCase("Patient Line") != 0){
+				else if(data[2].isBlank()){
 					dataAttribute = "Patient Line";
 				} 
-				else if(data[3].compareToIgnoreCase("Office Number") != 0){
+				else if(data[3].isBlank()){ //if there is a space after the last comma, then the array will register a 4th position with a content as a space
 					dataAttribute = "Office Number";
 				}
 			}
