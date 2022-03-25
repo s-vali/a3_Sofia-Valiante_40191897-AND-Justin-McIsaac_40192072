@@ -25,16 +25,16 @@ public class CSVAttributeMissing extends Exception {
 		String dataAttribute = "";
 		if(currentFile.getName().compareTo("covidStatistics-CSV format.csv") == 0) {
 			try {
-				if(data[0].compareToIgnoreCase("Age Group") != 0 || data[0] == null) {
+				if(data[0].compareToIgnoreCase("Age Group") != 0) {
 					dataAttribute = "Age Group";
 				}
-				else if(data[1].compareToIgnoreCase("Hospitalized") != 0 || data[1] == null) {
+				else if(data[1].compareToIgnoreCase("Hospitalized") != 0) {
 					dataAttribute = "Hospitalized";
 				}
-				else if(data[2].compareToIgnoreCase("ICU") != 0 || data[2] == null){
+				else if(data[2].compareToIgnoreCase("ICU") != 0){
 					dataAttribute = "ICU";
 				}
-				else if(data[3].compareToIgnoreCase("Fully Vaccinated") != 0 || data[3] == null){
+				else if(data[3].compareToIgnoreCase("Fully Vaccinated") != 0){
 					dataAttribute = "Fully Vaccinated";
 				}
 			}
