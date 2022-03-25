@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 //-----------------------------------------------------
 //Assignment 3
-//Question: (include question/part number, if applicable)
 //Written by: Justin_McIsaac_40192072 and Sofia_Valiante_40191897
 //-----------------------------------------------------
 /**
