@@ -1,26 +1,38 @@
+/**
+ * Written by: Sofia Valiante 40191897 & Justin McIsaac 40192072
+ * COMP 249
+ * Assignment 3
+ * Due: March 25th, 2022
+ */
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-//-----------------------------------------------------
-//Assignment 3
-//Written by: Justin_McIsaac_40192072 and Sofia_Valiante_40191897
-//-----------------------------------------------------
+
 /**
- * This program's purpose is to transfer information from excel tables to a hospital's website in HTML table format, in the best way possible.
+ * This program's purpose is to transfer information from excel tables to a hospital's 
+ * website in HTML table format, in the best way possible.
  */
 public class DriverIOTest {
 	
 // -------------------------------------------------------------------------------------------------------------------------------------------------------
 // static methods	
+	
 	/**
-	 * This static method transfers information from a CSV file to HTML format.
+	 * This static method transfers information from a CSV file to HTML format. It first prints all the necessary code
+	 * to the HTML file before beginning the table. The method runs through each line of the CSV files. For each line, 
+	 * it uses the delimiter "," to break up the String into a String array and will perform the appropriate code for the
+	 * line. First it will begin with a <table>, then the first line of the CSV will be the title of the table. The second line
+	 * will be the title columns and will use <th>. The following lines will use <tr> until the last line has been reached,
+	 * in which case the data will be a footnote. 
+	 * 
 	 * @param inputStream
 	 * @param outputStream
 	 * @param currentFile
@@ -30,7 +42,7 @@ public class DriverIOTest {
 	 */
 	public static void ConvertCSVtoHTML(Scanner inputStream, PrintWriter outputStream, File currentFile, PrintWriter writeToExceptionsLog) throws CSVAttributeMissing, CSVDataMissing {
 		
-		outputStream.print("<!DOCTYPE html>");
+		outputStream.print("<!DOCTYPE html>"); //all HTML code before <table>
 		outputStream.print("<html>");
 		outputStream.print("<style>");
 		outputStream.print("table { font-family: arial, sans-serif; border-collapse: collapse; } "
@@ -58,7 +70,7 @@ public class DriverIOTest {
 				int i = 0;
 				try {
 					for(i = 0; i < NB_OF_COL; i++) {
-						if(cells[i].replaceAll("\\s", "") == "") {
+						if(cells[i].replaceAll("\\s", "") == "") { //remove all white space from cell, if cell is empty throw appropriate exception
 							throw new CSVAttributeMissing(currentFile, writeToExceptionsLog, cells);
 						}
 						else {
@@ -93,16 +105,16 @@ public class DriverIOTest {
 					throw new CSVDataMissing(currentFile, writeToExceptionsLog, cells, lineNb);
 				}
 			}
-		}
-		
+		}	
 		outputStream.print("</body>");
 		outputStream.print("</html>");	
 	}
 	
 // -------------------------------------------------------------------------------------------------------------------------------------------------------
 // main()	
+	
 	/**
-	 * Main
+	 * Main method
 	 * @param args
 	 */
 	public static void main(String[] args) {	
@@ -110,6 +122,7 @@ public class DriverIOTest {
 		/*
 		 * Variables and Objects
 		 */
+		//Scanner and PrintWriter objects
 		Scanner userInput = null;
 		Scanner inputFileCS = null; //global variable
 		Scanner inputFileDL = null;
@@ -117,14 +130,24 @@ public class DriverIOTest {
 		PrintWriter outputFileDL = null;
 		PrintWriter writeToExceptionsLog = null;
 		BufferedReader readFile = null;
-		
+		 
+		//File Objects
 		File covidStatisticsCSV = null;
 		File doctorListCSV = null;
 	
+		//Strings to keep track of current file
 		String filename = "";
 		String filetype = "";
 		boolean closeFile = false;
 		int Attempts = 2;
+		
+		/*
+		 * Opening message
+		 */
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("       Welcome To DriverIO by: Sofia Valiante & Justin McIsaac ");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println();
 		
 		/*
 		 * Open the input files and create output files
@@ -134,13 +157,13 @@ public class DriverIOTest {
 			filename = "Exceptions.log";
 			filetype = "writing";
 			System.out.println("Attempting to create " + filename + "... ");
-			writeToExceptionsLog = new PrintWriter(new FileOutputStream(filename, true));
+			writeToExceptionsLog = new PrintWriter(new FileOutputStream(filename));
 			System.out.println("Attempt successful! ");	
 			System.out.println();
 			
 			//Opening covidStatistics-CSV format.csv
 			covidStatisticsCSV = new File("covidStatistics-CSV format.csv");
-			filename = "covidStatistics-CSV format.csv";
+			filename = covidStatisticsCSV.getName();
 			filetype = "reading";
 			System.out.println("Opening the input file " + covidStatisticsCSV.getName() + "... ");
 			inputFileCS = new Scanner(new FileInputStream(covidStatisticsCSV.getName()));
@@ -149,7 +172,7 @@ public class DriverIOTest {
 
 			//Open doctorList-CSVformat.csv
 			doctorListCSV = new File("doctorList-CSVformat.csv");
-			filename = "doctorList-CSVformat.csv";
+			filename = doctorListCSV.getName();
 			filetype = "reading";
 			System.out.println("Opening the input file " + doctorListCSV.getName() + "... ");
 			inputFileDL = new Scanner(new FileInputStream(doctorListCSV.getName()));
@@ -179,7 +202,6 @@ public class DriverIOTest {
 			System.out.println("Attempt successful! ");
 			
 			//When ConvertCSVToHTML method has completed, close all files to flush the data
-			
 			outputFileCS.close();
 			outputFileDL.close();
 			inputFileCS.close();
@@ -188,9 +210,7 @@ public class DriverIOTest {
 						
 		}	
 		catch(FileNotFoundException e) {
-			//Out-print to Exceptions.log
-			//writeToExceptionsLog(writeToExceptionsLog, "FileNotFoundException", filename);
-			//Out-print to console
+			//Out-print to Exceptions.log and to console
 			System.out.print("Could not open file " + filename + " for ");
 			writeToExceptionsLog.print("Could not open file " + filename + " for ");
 			if(filetype.compareToIgnoreCase("reading") == 0) {
@@ -208,8 +228,7 @@ public class DriverIOTest {
 			System.out.println("This program will terminate after closing any opened files. ");
 			writeToExceptionsLog.println("This program will terminate after closing any opened files. ");
 			//Close file and program
-			closeFile = true;
-			
+			closeFile = true;	
 		}
 		catch(CSVAttributeMissing e) {
 			System.out.println(e);
@@ -250,35 +269,48 @@ public class DriverIOTest {
 				writeToExceptionsLog.close();
 				System.exit(0); //terminates the program
 			}
-		}
-		//Display one of the files to the console - REQUIREMENT 5
-
-		userInput = new Scanner(System.in);
-		while (Attempts > 0) {
-			try {
-				System.out.println("Enter the name of the file you would like to read from: ");
-				filename = userInput.nextLine();
-				readFile = new BufferedReader(new FileReader(filename));
-				String line = readFile.readLine();
-				while (line != null) {
-					System.out.println(line);
-					line = readFile.readLine();
+			
+			//Display one of the files to the console
+			System.out.println();
+			userInput = new Scanner(System.in);
+			while (Attempts > 0) {
+				try {		
+					System.out.print("Enter the name of the file you would like to read from: ");
+					filename = userInput.nextLine();
+					readFile = new BufferedReader(new FileReader(filename));
+					String line = readFile.readLine();
+					while (line != null) {
+						System.out.println(line);
+						line = readFile.readLine();
+					}
+					System.out.println();
+				}
+				catch (FileNotFoundException e) {
+					Attempts--;
+					System.out.print(filename + " was not found.");
+					if (Attempts > 0)
+						System.out.print(" Try again, ");
+				}
+				catch (IOException e) {
+					Attempts--;
+					System.out.print(filename + " was not found. ");
+					if (Attempts > 0)
+						System.out.println(" Try again, ");
 				}
 			}
-			catch (FileNotFoundException e) {
-				Attempts--;
-				System.out.println(filename + " was not found.");
-				if (Attempts > 0)
-					System.out.println("Try again: ");
-			}
-			catch (IOException e) {
-				Attempts--;
-				System.out.println(filename + " was not found.");
-				if (Attempts > 0)
-					System.out.println("Try again: ");
-			}
+			if(userInput != null) {
+				userInput.close();
+			}	
 		}
-		userInput.close();
+		
+		/*
+		 * End of program message
+		 */
+		System.out.println(); System.out.println();
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("            Program Has Completed           ");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+		
 	}
 }
 		
