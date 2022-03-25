@@ -1,7 +1,7 @@
 /**
  * Written by: Sofia Valiante 40191897 & Justin McIsaac 40192072
  * COMP 249
- * Assignment 3
+ * Assignment 3, Question 2
  * Due: March 25th, 2022
  */
 
